@@ -17,7 +17,7 @@ function MostrarDatos(datos){
                 <td>${integrante.apellido}</td>
                 <td>${integrante.correo}</td>
                 <td>
-                    <button>Editar</button>
+                    <button>Eliminar</button>
                     <button>Editar</button>
                 </td>
             </tr>
