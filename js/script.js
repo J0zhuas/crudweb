@@ -112,3 +112,35 @@ function AbrirModalEditar(id, nombre, apellido, correo){
     //abrimos el modal
     modalEditar.showModal();
 }
+
+document.getElementById("frmEditar").addEventListener("submit",  async e => {
+    e.preventDefault(); //evita que el formulario se envie
+    //capturamos valores de input
+    const id = document.getElementById("txtEditar").value;
+    const nombre = document.getElementById("txtNombreEditar").value.trim();
+    const apellido = document.getElementById("txtApellidoEditar").value.trim();
+    const correo = document.getElementById("txtEmailEditar").value.trim();
+    //validacion de las constantes
+    if(!id ||!nombre || !apellido || !correo){
+        alert("Ingrese los valores correctamente");
+        return;
+    }
+    //llamar a la api
+    const respuesta = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({nombre, apellido, correo})
+    });
+    if(respuesta.ok){
+        alert("El registro fue actualizado correctamente");
+
+        //cerrar el modal
+        modalEditar.close();
+        
+        //recargar la tabla
+        ObtenerIntegrantes();
+    }else{
+        //En caso de que la API devuelva un codigo diferente a 200-299
+        alert("El registro no pudo ser actualizado")
+    }
+});
