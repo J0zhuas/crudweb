@@ -17,7 +17,7 @@ function MostrarDatos(datos){
                 <td>${integrante.apellido}</td>
                 <td>${integrante.correo}</td>
                 <td>
-                    <button>Editar</button>
+                    <button onclick="AbrirModalEditar('${integrante.id}','${integrante.nombre}', '${integrante.apellido}', '${integrante.correo}')">Editar</button>
                     <button onclick="EliminarPersona(${integrante.id})">Eliminar</button>
                 </td>
             </tr>
@@ -91,4 +91,24 @@ async function EliminarPersona(id){
         });
         ObtenerIntegrantes();
     }
+}
+
+//editar registro
+const modalEditar = document.getElementById("mdEditar");
+const btnCerrarEditar = document.getElementById("btnCerrarEditar");
+
+//cerrar la ventana del modal
+btnCerrarEditar.addEventListener("click", ()=>{
+    modalEditar.close();
+});
+
+function AbrirModalEditar(id, nombre, apellido, correo){
+    //agregar los valores del registro en los input
+    document.getElementById("txtEditar").value = id;
+    document.getElementById("txtNombreEditar").value = nombre;
+    document.getElementById("txtApellidoEditar").value = apellido;
+    document.getElementById("txtEmailEditar").value = correo;
+
+    //abrimos el modal
+    modalEditar.showModal();
 }
